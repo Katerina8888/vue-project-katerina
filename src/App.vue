@@ -10,8 +10,8 @@
   </ul>
 
   <a :href="link" target="_blink">Click for Google</a>
-
-  <button v-on:click="toggleStatus">Change Status</button>
+  <br />
+  <button @click="toggleStatus">Change Status</button>
 </template>
 
 <script lang="ts">
