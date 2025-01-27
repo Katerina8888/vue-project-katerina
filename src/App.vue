@@ -1,47 +1,39 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <h1>{{ name }}</h1>
+  <p v-if="status === 'active'">User is active</p>
+  <p v-else-if="status === 'pending'">User is pending</p>
+  <p v-else>User is inactive</p>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <h3>Tasks:</h3>
+  <ul>
+    <li :key="task" v-for="task in tasks">{{ task }}</li>
+  </ul>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <a :href="link" target="_blink">Click for Google</a>
+
+  <button v-on:click="toggleStatus">Change Status</button>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script lang="ts">
+export default {
+  data() {
+    return {
+      name: 'John Doe',
+      status: 'active',
+      tasks: ['Task One', 'Taks Two', 'Task Three'],
+      link: 'https://www.google.com/',
+    }
+  },
+  methods: {
+    toggleStatus() {
+      if (this.status === 'active') {
+        this.status = 'pendign'
+      } else if (this.status === 'pending') {
+        this.status = 'inactive'
+      } else {
+        this.status = 'active'
+      }
+    },
+  },
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+</script>
