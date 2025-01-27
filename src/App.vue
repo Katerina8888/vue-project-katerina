@@ -9,31 +9,23 @@
     <li :key="task" v-for="task in tasks">{{ task }}</li>
   </ul>
 
-  <a :href="link" target="_blink">Click for Google</a>
   <br />
   <button @click="toggleStatus">Change Status</button>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      name: 'John Doe',
-      status: 'active',
-      tasks: ['Task One', 'Taks Two', 'Task Three'],
-      link: 'https://www.google.com/',
-    }
-  },
-  methods: {
-    toggleStatus() {
-      if (this.status === 'active') {
-        this.status = 'pendign'
-      } else if (this.status === 'pending') {
-        this.status = 'inactive'
-      } else {
-        this.status = 'active'
-      }
-    },
-  },
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const name = ref('John Doe')
+const status = ref('active')
+const tasks = ref(['Task One', 'Task Two', 'Task Three'])
+const toggleStatus = () => {
+  if (status.value === 'active') {
+    status.value = 'pendign'
+  } else if (status.value === 'pending') {
+    status.value = 'inactive'
+  } else {
+    status.value = 'active'
+  }
 }
 </script>
